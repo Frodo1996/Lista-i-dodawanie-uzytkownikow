@@ -1,4 +1,4 @@
-package com.example.zad_lista_i_dodawania_uzytkownikow;
+package com.example.userslist;
 
 public class User {
     private final String firstName;

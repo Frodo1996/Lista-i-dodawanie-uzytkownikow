@@ -1,10 +1,10 @@
-package com.example.zad_lista_i_dodawania_uzytkownikow;
+package com.example.userslist;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @Controller
 public class UserController {
 
@@ -14,7 +14,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping("/add")
     public String addNewUser(@RequestParam(name = "imie", required = false) String firstName,
                              @RequestParam(name = "nazwisko", required = false) String lastName,
                              @RequestParam(name = "wiek", required = false) Integer age) {
@@ -25,9 +25,11 @@ public class UserController {
             return "redirect:/success.html";
         }
     }
-    @RequestMapping("/users")
+
+    @GetMapping("/users")
     @ResponseBody
     public String printUserList() {
-        return userRepository.printAllUsers();
+        List<User> allUsers = userRepository.findAllUsers();
+        return allUsers.toString();
     }
 }

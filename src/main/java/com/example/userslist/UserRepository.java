@@ -1,12 +1,14 @@
-package com.example.zad_lista_i_dodawania_uzytkownikow;
+package com.example.userslist;
 
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class UserRepository {
 
-    List<User> userList;
+    private final List<User> userList;
 
     public UserRepository(List<User> userList) {
         userList.add(new User("Ania", "Kowalska", 36));
@@ -20,15 +22,6 @@ public class UserRepository {
     }
 
     public List<User> findAllUsers() {
-        return userList;
-    }
-
-    public String printAllUsers() {
-        List<User> allUsers = findAllUsers();
-        StringBuilder result = new StringBuilder();
-        for (User user : allUsers) {
-            result.append(user).append("<br/>");
-        }
-        return result.toString();
+        return new ArrayList<>(userList);
     }
 }
